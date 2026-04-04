@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "BitcoinSolar Cosmic Ape - NFT Showcase"
+version = "1.0.0"
+id = "artifacts/nft-showcase"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21051
+
+[services.development]
+run = "pnpm --filter @workspace/nft-showcase run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nft-showcase", "run", "build" ]
+publicDir = "artifacts/nft-showcase/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21051"
+BASE_PATH = "/"
